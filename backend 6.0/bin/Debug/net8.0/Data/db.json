@@ -1,0 +1,32 @@
+{
+  "Investments": [
+    {
+      "Id": "f8e704c4-6502-4d4e-9471-8e74f5be23e9",
+      "UserId": 3,
+      "Type": "stock",
+      "TransactionType": "buy",
+      "StockName": "Reliance",
+      "DematAccount": "Groww",
+      "PurchaseDate": "2025-05-05T06:48:26.465Z",
+      "NumberOfShares": 20,
+      "Brokerage": 0.1,
+      "BrokerageType": "%",
+      "PurchasePrice": 3000,
+      "FixedIncomeName": "string",
+      "InvestmentDate": "2025-05-05T06:48:26.465Z",
+      "InvestmentAmount": 0,
+      "CouponRate": 0,
+      "CompoundingFrequency": "string",
+      "InterestType": "string",
+      "MaturityDate": "2025-05-05T06:48:26.465Z",
+      "SchemeName": "string",
+      "FolioNumber": "string",
+      "AmountType": "string",
+      "Amount": 0,
+      "Price": 0,
+      "RedemptionDate": "2025-05-05T06:48:26.465Z",
+      "SellAt": "string",
+      "SellPrice": 0
+    }
+  ]
+}
