@@ -1,0 +1,470 @@
+<div class="modal">
+  <div class="modal-dialog">
+    <div class="modal-header">
+      <h3>{{ isEdit ? "Edit Investment" : "Add Investment" }}</h3>
+
+      <button class="close-btn" (click)="closeForm()">×</button>
+    </div>
+
+    <div class="modal-body">
+      <!-- Select Investment Type -->
+      <div class="form-group">
+        <label for="type">Investment Type:</label>
+        <select
+          id="type"
+          [(ngModel)]="investment.type"
+          class="form-control"
+          [disabled]="isEdit"
+        >
+          <option value="stock">Stock</option>
+          <option value="bond">Bond</option>
+          <option value="mutualFund">Mutual Fund</option>
+          <option value="goldBond">Gold Bond</option>
+        </select>
+      </div>
+      <!-- Transaction Type Selection -->
+      <div class="form-group transaction-type">
+        <label for="transactionType">Transaction Type</label>
+        <div class="select-wrapper">
+          <select
+            id="transactionType"
+            [(ngModel)]="transactionType"
+            class="form-control"
+          >
+            <option value="buy">Buy</option>
+            <option value="sell">Sell</option>
+          </select>
+        </div>
+      </div>
+      <!-- Stock Form -->
+      <div *ngIf="investment.type === 'stock'" class="form-section">
+        <h4>Stock Details</h4>
+        <div class="form-group">
+          <label for="stockName">STOCK NAME</label>
+          <div class="input-with-icon">
+            <input
+              id="stockName"
+              [(ngModel)]="investment.stockName"
+              class="form-control"
+              placeholder="Stock name"
+              [readonly]="isEdit"
+            />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="dematAccount">DEMAT A/C</label>
+          <input
+            id="dematAccount"
+            [(ngModel)]="investment.dematAccount"
+            class="form-control"
+            placeholder="Demat A/c"
+          />
+        </div>
+        <div class="form-group">
+          <label for="investmentDate">DATE OF INVESTMENT</label>
+          <div class="date-input">
+            <input
+              id="investmentDate"
+              type="date"
+              [(ngModel)]="investment.investmentDate"
+              class="form-control"
+            />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="numberOfShares">NO. OF SHARES</label>
+          <input
+            id="numberOfShares"
+            type="number"
+            [(ngModel)]="investment.numberOfShares"
+            class="form-control"
+            placeholder="No. of Shares"
+          />
+        </div>
+        <div class="form-group">
+          <label for="brokerage">BROKERAGE</label>
+          <input
+            id="brokerage"
+            type="number"
+            [(ngModel)]="investment.brokerage"
+            class="form-control"
+            placeholder="0.100000"
+          />
+        </div>
+        <div class="form-group">
+          <label for="brokerageType">BROKERAGE TYPE</label>
+          <div class="radio-group">
+            <select
+              id="brokerageType"
+              [(ngModel)]="investment.brokerageType"
+              class="form-control"
+            >
+              <option value="%">%</option>
+              <option value="rs">Rs</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="purchasePrice">PURCHASE PRICE</label>
+          <input
+            id="purchasePrice"
+            type="number"
+            [(ngModel)]="investment.purchasePrice"
+            class="form-control"
+            placeholder="Purchase price"
+          />
+        </div>
+        <div *ngIf="transactionType === 'sell'">
+          <div class="form-group">
+            <label for="sellPrice">SELL PRICE</label>
+            <input
+              id="sellPrice"
+              type="number"
+              [(ngModel)]="investment.sellPrice"
+              class="form-control"
+              placeholder="Sell price"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- Bond Form -->
+      <div *ngIf="investment.type === 'bond'" class="form-section">
+        <h4>Bond Details</h4>
+        <div class="form-group">
+          <label for="fixedIncomeName">FIXED INCOME NAME</label>
+          <input
+            id="fixedIncomeName"
+            [(ngModel)]="investment.fixedIncomeName"
+            class="form-control"
+            placeholder="Fixed Income Name"
+          />
+        </div>
+        <div class="form-group">
+          <label for="investmentDate">INVESTMENT DATE</label>
+          <div class="date-input">
+            <input
+              id="investmentDate"
+              type="date"
+              [(ngModel)]="investment.investmentDate"
+              class="form-control"
+            />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="investmentAmount">INVESTMENT AMOUNT</label>
+          <input
+            id="investmentAmount"
+            type="number"
+            [(ngModel)]="investment.investmentAmount"
+            class="form-control"
+            placeholder="Amount in ₹"
+          />
+        </div>
+        <div class="form-group">
+          <label for="rateOfInterest">RATE OF INTEREST (% P.A.)</label>
+          <input
+            id="rateOfInterest"
+            type="number"
+            [(ngModel)]="investment.rateOfInterest"
+            class="form-control"
+            placeholder="Interest rate"
+          />
+        </div>
+        <div class="form-group">
+          <label for="compoundingFrequency">COMPOUNDING FREQUENCY</label>
+          <select
+            id="compoundingFrequency"
+            [(ngModel)]="investment.compoundingFrequency"
+            class="form-control"
+          >
+            <option value="monthly">Monthly</option>
+            <option value="quarterly">Quarterly</option>
+            <option value="half-yearly">Half-Yearly</option>
+            <option value="yearly">Yearly</option>
+            <option value="on maturity">On Maturity</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="interestType">INTEREST TYPE</label>
+          <select
+            id="interestType"
+            [(ngModel)]="investment.interestType"
+            class="form-control"
+          >
+            <option value="accrued">Accrued</option>
+            <option value="interest payout">Interest Payout</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="maturityDate">MATURITY DATE</label>
+          <div class="date-input">
+            <input
+              id="maturityDate"
+              type="date"
+              [(ngModel)]="investment.maturityDate"
+              class="form-control"
+            />
+          </div>
+        </div>
+        <div *ngIf="transactionType === 'sell'">
+          <div class="form-group">
+            <label for="redemptionDate">REDEMPTION DATE</label>
+            <input
+              id="redemptionDate"
+              type="date"
+              [(ngModel)]="investment.redemptionDate"
+              class="form-control"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- Mutual Fund Form Section -->
+      <div *ngIf="investment.type === 'mutualFund'" class="form-section">
+        <!-- Scheme Name -->
+        <div class="form-group">
+          <label for="schemeName">SCHEME NAME</label>
+          <div class="input-with-icon">
+            <input
+              id="schemeName"
+              [(ngModel)]="investment.schemeName"
+              class="form-control"
+              placeholder="Scheme name"
+            />
+          </div>
+        </div>
+
+        <!-- Folio Number -->
+        <div class="form-group">
+          <label for="folioNumber">FOLIO NUMBER</label>
+          <input
+            id="folioNumber"
+            [(ngModel)]="investment.folioNumber"
+            class="form-control"
+            placeholder="Folio Number"
+          />
+        </div>
+
+        <!-- Date of Investment -->
+        <div class="form-group">
+          <label for="investmentDate">DATE OF INVESTMENT</label>
+          <div class="date-input">
+            <input
+              id="investmentDate"
+              type="date"
+              [(ngModel)]="investment.investmentDate"
+              class="form-control"
+            />
+          </div>
+        </div>
+
+        <!-- Amount -->
+        <div class="form-group">
+          <label for="amount">AMOUNT (₹)</label>
+          <input
+            id="amount"
+            type="number"
+            [(ngModel)]="investment.amount"
+            class="form-control"
+            placeholder="Amount"
+          />
+        </div>
+
+        <!-- Price -->
+        <div class="form-group">
+          <label for="price">PRICE</label>
+          <input
+            id="price"
+            type="number"
+            [(ngModel)]="investment.price"
+            class="form-control"
+            placeholder="Price"
+          />
+        </div>
+      </div>
+
+      <!-- Mutual Fund Sell Section -->
+      <div
+        *ngIf="transactionType === 'sell' && investment.type === 'mutualFund'"
+        class="form-section"
+      >
+        <!-- Redemption Date -->
+        <div class="form-group">
+          <label for="redemptionDate">REDEMPTION DATE</label>
+          <div class="date-input">
+            <input
+              id="redemptionDate"
+              type="date"
+              [(ngModel)]="investment.redemptionDate"
+              class="form-control"
+            />
+          </div>
+        </div>
+
+        <!-- Sell At -->
+        <div class="form-group">
+          <label for="sellAt">SELL AT</label>
+          <select
+            id="sellAt"
+            [(ngModel)]="investment.sellAt"
+            class="form-control"
+          >
+            <option value="fund">Fund</option>
+            <option value="market">Market</option>
+          </select>
+        </div>
+
+        <!-- Sell Price -->
+        <div class="form-group">
+          <label for="sellPrice">SELL PRICE</label>
+          <input
+            id="sellPrice"
+            type="number"
+            [(ngModel)]="investment.sellPrice"
+            class="form-control"
+            placeholder="Sell price"
+          />
+        </div>
+      </div>
+
+      <!-- Gold Bond Form -->
+      <!-- Gold Bond Form Section -->
+      <div *ngIf="investment.type === 'goldBond'" class="form-section">
+        <!-- Security Name -->
+        <div class="form-group">
+          <label for="securityName">SECURITY NAME</label>
+          <input
+            id="securityName"
+            [(ngModel)]="investment.securityName"
+            class="form-control"
+            placeholder="Security Name"
+          />
+        </div>
+
+        <!-- Purchase Date -->
+        <div class="form-group">
+          <label for="purchaseDate">PURCHASE DATE</label>
+          <div class="date-input">
+            <input
+              id="purchaseDate"
+              type="date"
+              [(ngModel)]="investment.purchaseDate"
+              class="form-control"
+            />
+          </div>
+        </div>
+
+        <!-- Units -->
+        <div class="form-group">
+          <label for="units">UNITS</label>
+          <input
+            id="units"
+            type="number"
+            [(ngModel)]="investment.units"
+            class="form-control"
+            placeholder="Units"
+          />
+        </div>
+
+        <!-- Price -->
+        <div class="form-group">
+          <label for="price">PRICE</label>
+          <input
+            id="price"
+            type="number"
+            [(ngModel)]="investment.price"
+            class="form-control"
+            placeholder="Price"
+          />
+        </div>
+
+        <!-- Brokerage -->
+        <div class="form-group">
+          <label for="brokerage">BROKERAGE</label>
+          <input
+            id="brokerage"
+            type="number"
+            [(ngModel)]="investment.brokerage"
+            class="form-control"
+            placeholder="Brokerage"
+          />
+        </div>
+
+        <!-- Brokerage Type -->
+        <div class="form-group">
+          <label for="brokerageType">BROKERAGE TYPE</label>
+          <select
+            id="brokerageType"
+            [(ngModel)]="investment.brokerageType"
+            class="form-control"
+          >
+            <option value="%">%</option>
+            <option value="rs">Rs</option>
+          </select>
+        </div>
+
+        <!-- Coupon Rate -->
+        <div class="form-group">
+          <label for="couponRate">COUPON RATE</label>
+          <input
+            id="couponRate"
+            type="number"
+            [(ngModel)]="investment.couponRate"
+            class="form-control"
+            placeholder="Coupon Rate"
+          />
+        </div>
+
+        <!-- Maturity Date -->
+        <div class="form-group">
+          <label for="maturityDate">MATURITY DATE</label>
+          <div class="date-input">
+            <input
+              id="maturityDate"
+              type="date"
+              [(ngModel)]="investment.maturityDate"
+              class="form-control"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- Gold Bond Sell Section -->
+      <div
+        *ngIf="transactionType === 'sell' && investment.type === 'goldBond'"
+        class="form-section"
+      >
+        <!-- Redemption Date -->
+        <div class="form-group">
+          <label for="redemptionDate">REDEMPTION DATE</label>
+          <div class="date-input">
+            <input
+              id="redemptionDate"
+              type="date"
+              [(ngModel)]="investment.redemptionDate"
+              class="form-control"
+            />
+          </div>
+        </div>
+
+        <!-- Sell Price -->
+        <div class="form-group">
+          <label for="sellPrice">SELL PRICE</label>
+          <input
+            id="sellPrice"
+            type="number"
+            [(ngModel)]="investment.sellPrice"
+            class="form-control"
+            placeholder="Sell price"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn-save" (click)="saveInvestment()">Save</button>
+      <button class="btn-cancel" (click)="closeForm()">Cancel</button>
+    </div>
+  </div>
+</div>
