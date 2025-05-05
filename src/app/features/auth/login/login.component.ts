@@ -49,7 +49,10 @@ export class LoginComponent implements OnInit {
         next: (response) => {
           console.log('Login response:', response); // Log the response for debugging
           if (response && response.token) {
-            localStorage.setItem('authToken', response.token); // Store the token in localStorage
+            localStorage.setItem('authToken', response.token);
+            console.log(response); // Store the token in localStorage
+            localStorage.setItem('userId', response.userId);
+
             this.auth.setUser(response.user); // Set the user in AuthService
             this.router.navigate(['/dashboard']); // Navigate to home page after successful login
           } else {

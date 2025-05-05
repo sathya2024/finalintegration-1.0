@@ -3,19 +3,19 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service'; // Import the AuthService
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { AddInvestmentComponent } from '../add-investment/add-investment.component'; // Import FormsModule for ngModel
 
 @Component({
   selector: 'app-holdings',
   standalone: true,
-  imports: [CommonModule, AddInvestmentComponent, FormsModule],
+  imports: [CommonModule, AddInvestmentComponent,ReactiveFormsModule, FormsModule],
   templateUrl: './holdings.component.html',
   styleUrls: ['./holdings.component.css'],
 })
 export class HoldingsComponent implements OnInit {
   investments: any[] = [];
-  userId: number = 1;
+  
   totalInvestmentValue = 0;
   totalInvestmentCost = 0;
   totalGainLoss = 0;
@@ -28,7 +28,7 @@ export class HoldingsComponent implements OnInit {
   selectedInvestment: any | null = null;
   showDeleteConfirm = false;
   investmentToDelete: any = null;
-
+  userId: number = 0; // Initialize userId
   constructor(
     private http: HttpClient,
     private router: Router,
@@ -36,17 +36,20 @@ export class HoldingsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log('User ID:', this.userId); // Add this to debug
+    console.log('User ID:', this.userId);
+    this.userId=Number(localStorage.getItem('userId'));
     this.loadInvestments();
   }
-
+  
   loadInvestments(): void {
-    this.http.get<any[]>('http://localhost:3000/investments').subscribe({
+    this.http.get<any[]>(`http://localhost:5154/api/Investments/user/${this.userId}`).subscribe({
       next: (data) => {
         console.log('Fetched investments:', data); // Debugging line to check data
-        this.investments = data.filter(
-          (inv) => inv.userId === this.userId && inv.transactionType === 'buy'
-        );
+        // this.investments = data.filter(
+        //   (inv) => inv.userId === this.userId && inv.transactionType === 'buy'
+        // );
+        this.investments = data;
+
         console.log('Filtered investments:', this.investments); // Log filtered investments
         this.calculateTotals();
         this.loading = false;

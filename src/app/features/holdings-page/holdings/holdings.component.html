@@ -135,14 +135,7 @@
       <tbody>
         <tr *ngFor="let inv of investments">
           <td>
-            {{
-              inv.stockName ||
-                inv.fixedIncomeName ||
-                inv.schemeName ||
-                inv.securityName ||
-                inv.symbol ||
-                "-"
-            }}
+            {{ inv.stockName }}
           </td>
           <td>
             <span
@@ -154,17 +147,7 @@
                 'type-gold': inv.type === 'goldBond'
               }"
             >
-              {{
-                inv.type === "stock"
-                  ? "Stock"
-                  : inv.type === "bond"
-                  ? "Bond"
-                  : inv.type === "mutualFund"
-                  ? "Mutual Fund"
-                  : inv.type === "goldBond"
-                  ? "Gold Bond"
-                  : inv.type
-              }}
+              {{inv.type}}
             </span>
           </td>
           <td>

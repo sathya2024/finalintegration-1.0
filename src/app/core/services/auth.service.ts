@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { response } from 'express';
 import { tap } from 'rxjs/operators';
 
+
+
 @Injectable({
   providedIn: 'root',
 })
@@ -33,7 +35,8 @@ export class AuthService {
 
   setUser(user: any): void {
     this.loggedInUser = user;
-    localStorage.setItem('loggedInUser', JSON.stringify(user)); // Store the user in localStorage
+    localStorage.setItem('loggedInUser', JSON.stringify(user));
+    
   }
 
   clearUser(): void {
